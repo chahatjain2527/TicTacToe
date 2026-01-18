@@ -29,22 +29,23 @@
 }
 
 .instructions {
-    color: white;
+    color: black;
     font-size: 1rem;
     background-color: rgba(255, 255, 255, 0.15);
     padding: 10px;
     border-radius: 10px;
+    font-weight: bold;
 }
 
 /* BUTTON */
 .btn {
-    color: white;
+    color: black;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.25);
     border-radius: 5px;
     border: none;
     padding: 10px;
-
+    font-weight: bold;
 }
 
 /* GAME BOARD (UNCHANGED STRUCTURE) */
@@ -64,10 +65,11 @@
     aspect-ratio: 1 / 1;
     cursor: pointer;
     font-size: 3rem;
-    color: white;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: bold;
 }
 
 .box1,
@@ -101,8 +103,9 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: white;
+    color: black;
     font-size: 0.9rem;
+    font-weight: bold;
 }
 
 /* SWITCH STYLE */
