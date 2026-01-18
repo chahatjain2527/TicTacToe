@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
             box.classList = `box box${index+1}`;
         });
         document.getElementById('btn1').style.visibility = 'hidden';
-        instructions.innerText = `Current Player: ${currPlayer}`;        
+        instructions.innerText = `${currPlayer}`;        
       }
     
       Initial();
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
           currPlayer = 'O';
         else
           currPlayer = "X";
-        instructions.innerHTML = `Current Player: ${currPlayer}`;
+        instructions.innerHTML = `${currPlayer}`;
       }
 
       function GameCheck(){
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             
             if(answer !== ""){                
-                instructions.innerText = `WINNER IS ${answer}`;
+                instructions.innerText = `${answer} Wins`;
                 document.getElementById('btn1').style.visibility = 'visible';
                 return;
             }
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         if(count === 9){
-            instructions.innerText = "Game Is Tied...!";
+            instructions.innerText = "Game Tied...!";
             document.getElementById('btn1').style.visibility = 'visible';
         }
       }
