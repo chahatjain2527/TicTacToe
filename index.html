@@ -4,17 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">    
-    <script src="script.js"></script>
+    <link id="light-them" rel="stylesheet" href="lightThemStyle.css">    
+    <script src="script.js" defer></script>
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
-    
+
     <div class="wrapper">
-        <div>
-        <p class="instructions"></p>
-        <button id="btn1" class="btn">New Game</button>
-    </div>
+        <div class="theme-toggle">
+            <label class="switch">
+                <input type="checkbox" id="themeToggle">
+                <span class="slider"></span>
+            </label>
+            <span class="toggle-text">Dark Mode</span>
+        </div>
+        
+        <div class="top-bar">
+            <p class="instructions"></p>
+            <button id="btn1" class="btn">New Game</button>
+        </div>
+
         <div class="gameBox">
             <div class="box box1"></div>
             <div class="box box2"></div>
@@ -26,7 +35,6 @@
             <div class="box box8"></div>
             <div class="box box9"></div>
         </div>
-
 
     </div>
 
