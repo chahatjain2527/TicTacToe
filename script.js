@@ -1,10 +1,10 @@
-document.addEventListener("DOMContentLoaded", function () {
   const boxes = document.querySelectorAll(".box");
   const instructions = document.querySelector(".instructions");
   const btn = document.querySelector(".btn");
   const toggle = document.getElementById("themeToggle");
   let currPlayer;
   let gameGrid;
+  let count = 0;
   const winPos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -15,8 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
     [0, 4, 8],
     [2, 4, 6]
   ];
-  function Initial() {
+
+  function Initial() {// this function initalize all things on page load
     currPlayer = "O";
+    count = 0;
     gameGrid = ["", "", "", "", "", "", "", "", ""];
     boxes.forEach((box, index) => {
       box.innerText = "";
@@ -29,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   Initial();
 
+  // this function swap playes after every turn
   function SwapPlayer() {
     if (currPlayer == 'X')
       currPlayer = 'O';
@@ -37,8 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
     instructions.innerHTML = `${currPlayer}`;
   }
 
+  // this function checks the winner 
   function GameCheck() {
     let answer = "";
+    //let count = 0;
 
     winPos.forEach((position) => {
 
@@ -66,27 +71,21 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    let count = 0;
-    gameGrid.forEach((box) => {
-      if (box !== "")
-        count++;
-    });
-
-    if (count === 9) {
+    if (count === 9) {// this situation check for tie condition
       instructions.innerText = "Game Tied...!";
       document.getElementById('btn1').style.visibility = 'visible';
     }
   }
 
-  function HandelCheck(index) {
+  // this function puts current player value in box and make it disable
+  function HandelCheck(index) { 
     if (gameGrid[index] === "") {
       boxes[index].innerHTML = currPlayer;
       boxes[index].style.pointerEvents = "none";
       gameGrid[index] = currPlayer;
-
+      count++;
       SwapPlayer();
       GameCheck();
-
     }
   }
 
@@ -96,18 +95,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   })
 
-
-
-  // btn.addEventListener('click',Initial);
-  btn.onclick = function () {
+  btn.addEventListener('click',()=>{
     Initial();
-  };
+  });
   
-  toggle.onchange = function () {
-    if (!toggle.checked)
-      document.getElementById("light-them").href = "lightThemStyle.css";
-    else
-      document.getElementById("light-them").href = "darkThemStyle.css";
-  };
-
-});
+  toggle.addEventListener("change",()=>{
+    document.getElementById("light-them").href = toggle.checked ? "darkThemStyle.css" : "lightThemStyle.css"
+  });
