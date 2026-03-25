@@ -1,4 +1,4 @@
-  const boxes = document.querySelectorAll(".box");
+const boxes = document.querySelectorAll(".box");
   const instructions = document.querySelector(".instructions");
   const btn = document.querySelector(".btn");
   const toggle = document.getElementById("themeToggle");
@@ -72,7 +72,7 @@
     });
 
     if (count === 9) {// this situation check for tie condition
-      instructions.innerText = "Tie...!";
+      instructions.innerText = "Game Tied...!";
       document.getElementById('btn1').style.visibility = 'visible';
     }
   }
@@ -82,6 +82,7 @@
     if (gameGrid[index] === "") {
       boxes[index].innerHTML = currPlayer;
       boxes[index].style.pointerEvents = "none";
+      boxes[index].classList.add(currPlayer === "X" ? "box-x" : "box-o");
       gameGrid[index] = currPlayer;
       count++;
       SwapPlayer();
