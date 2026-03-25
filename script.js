@@ -72,7 +72,7 @@
     });
 
     if (count === 9) {// this situation check for tie condition
-      instructions.innerText = "Game Tied...!";
+      instructions.innerText = "Tie...!";
       document.getElementById('btn1').style.visibility = 'visible';
     }
   }
