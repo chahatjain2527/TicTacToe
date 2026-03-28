@@ -313,6 +313,22 @@ input:checked + .slider::before {
     box-shadow: none;
 }
 
+.ai{
+    left: clamp(12px, 3vw, 20px) !important;
+    top: 60px;
+}
+#difficultySelector {
+    position: absolute;
+    top: 95px; /* below AI toggle */
+    left: clamp(12px, 3vw, 20px);
+    display: none; /* already in your HTML */
+    background: #7d6ef3;
+    padding: 8px 12px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+}
+
 /* RESPONSIVE: tall phones */
 @media (max-height: 600px) {
     .wrapper { gap: 0.75rem; padding: 0.75rem; }

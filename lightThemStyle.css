@@ -188,8 +188,23 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
+    z-index: 1000;
 }
-
+.ai{
+    left: clamp(12px, 3vw, 20px) !important;
+    top: 60px;
+}
+#difficultySelector {
+    position: absolute;
+    top: 95px; /* below AI toggle */
+    left: clamp(12px, 3vw, 20px);
+    display: none; /* already in your HTML */
+    background: var(--bg-card);
+    padding: 8px 12px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+}
 .toggle-label {
     font-size: clamp(0.75rem, 2vw, 0.9rem);
     color: var(--text-muted);
