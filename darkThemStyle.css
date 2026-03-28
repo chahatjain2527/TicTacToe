@@ -39,11 +39,11 @@ body {
     align-items: center;
     justify-content: center;
     gap: clamp(1rem, 3vw, 2rem);
-    padding: clamp(1rem, 4vw, 2rem);
+    padding: clamp(4rem, 6vw, 5rem) clamp(1rem, 4vw, 2rem) clamp(1rem, 4vw, 2rem);
     position: relative;
 }
 
-/* Noise texture overlay */
+/* Noise overlay */
 .wrapper::before {
     content: '';
     position: fixed;
@@ -53,7 +53,7 @@ body {
     pointer-events: none;
 }
 
-/* Radial accent glow */
+/* Radial glow */
 .wrapper::after {
     content: '';
     position: fixed;
@@ -91,6 +91,123 @@ body {
         0 0 8px rgba(124, 110, 245, 0.9),
         0 0 20px rgba(124, 110, 245, 0.6),
         0 0 40px rgba(124, 110, 245, 0.3);
+}
+
+/* ── CONTROLS ROW — both toggles in one absolute bar ── */
+.controls-row {
+    position: absolute;
+    top: clamp(12px, 3vw, 20px);
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(12px, 3vw, 20px);
+    z-index: 100;
+}
+
+.theme-toggle,
+.ai-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.toggle-label {
+    font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+    font-weight: 500;
+    color: var(--text-muted);
+    line-height: 1;
+    text-shadow: 0 0 6px rgba(124, 110, 245, 0.3);
+}
+
+/* SWITCH */
+.switch {
+    position: relative;
+    width: 42px;
+    height: 22px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background: var(--border);
+    border-radius: 34px;
+    inset: 0;
+    transition: 0.3s;
+    border: 1px solid var(--grid-line);
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background: var(--accent);
+    border-radius: 50%;
+    transition: 0.3s;
+    box-shadow: 0 0 8px var(--accent-glow);
+}
+
+input:checked + .slider { background: var(--accent); }
+input:checked + .slider::before {
+    transform: translateX(20px);
+    background: #fff;
+    box-shadow: none;
+}
+
+/* ── DIFFICULTY SELECTOR ── */
+#difficultySelector {
+    display: none;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 6px 8px;
+    box-shadow: var(--shadow-sm), 0 0 16px rgba(124, 110, 245, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.difficulty-options {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+/* Hide native radio */
+#difficultySelector input[type="radio"] { display: none; }
+
+/* Pill labels */
+#difficultySelector label {
+    font-size: clamp(0.65rem, 1.8vw, 0.78rem);
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 4px 12px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    user-select: none;
+    white-space: nowrap;
+}
+
+#difficultySelector label:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent);
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+
+#difficultySelector input[type="radio"]:checked + label {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow);
+    text-shadow: 0 0 8px rgba(255,255,255,0.4);
 }
 
 /* TOP BAR */
@@ -153,13 +270,8 @@ body {
     box-shadow: 0 0 28px var(--accent-glow);
 }
 
-.btn:active {
-    transform: scale(0.97);
-}
-
-#btn1 {
-    display: block;
-}
+.btn:active { transform: scale(0.97); }
+#btn1 { display: block; }
 
 /* GAME BOARD */
 .gameBox {
@@ -191,13 +303,8 @@ body {
     user-select: none;
 }
 
-.box:hover {
-    background: var(--accent-soft);
-}
-
-.box:active {
-    transform: scale(0.9);
-}
+.box:hover { background: var(--accent-soft); }
+.box:active { transform: scale(0.9); }
 
 /* GRID BORDERS */
 .box1, .box2, .box4, .box5 {
@@ -207,18 +314,7 @@ body {
 .box3, .box6 { border-bottom: 1.5px solid var(--grid-line); }
 .box7, .box8 { border-right: 1.5px solid var(--grid-line); }
 
-/* Neon X — hot pink */
-.box:not(.winner)[data-val="X"],
-.box:not(.winner):not(:empty) {
-    /* fallback, overridden below */
-}
-
-/* Use JS-agnostic CSS: style based on content via attribute trick */
-/* We target filled boxes by their text via pseudo trick — 
-   instead we inject a class via the existing logic structure.
-   Best approach: style all filled boxes, then differentiate with :has */
-
-/* Neon glow for X (pink) */
+/* Neon X (pink) */
 .box-x:not(.winner) {
     color: var(--neon-x);
     text-shadow:
@@ -227,7 +323,7 @@ body {
         0 0 40px rgba(255, 45, 120, 0.3);
 }
 
-/* Neon glow for O (cyan) */
+/* Neon O (cyan) */
 .box-o:not(.winner) {
     color: var(--neon-o);
     text-shadow:
@@ -254,88 +350,17 @@ body {
     100% { transform: scale(1); }
 }
 
-/* THEME TOGGLE */
-.theme-toggle {
-    position: absolute;
-    top: clamp(12px, 3vw, 20px);
-    right: clamp(12px, 3vw, 20px);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    z-index: 10;
+/* RESPONSIVE */
+@media (max-width: 360px) {
+    .controls-row { gap: 4px; }
+    .toggle-label { font-size: 0.65rem; }
 }
 
-.toggle-label {
-    font-size: clamp(0.75rem, 2vw, 0.9rem);
-    color: var(--text-muted);
-    line-height: 1;
-}
-
-.switch {
-    position: relative;
-    width: 42px;
-    height: 22px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    background: var(--border);
-    border-radius: 34px;
-    inset: 0;
-    transition: 0.3s;
-    border: 1px solid var(--grid-line);
-}
-
-.slider::before {
-    content: "";
-    position: absolute;
-    height: 14px;
-    width: 14px;
-    left: 3px;
-    bottom: 3px;
-    background: var(--accent);
-    border-radius: 50%;
-    transition: 0.3s;
-    box-shadow: 0 0 8px var(--accent-glow);
-}
-
-input:checked + .slider { background: var(--accent); }
-input:checked + .slider::before {
-    transform: translateX(20px);
-    background: #fff;
-    box-shadow: none;
-}
-
-.ai{
-    left: clamp(12px, 3vw, 20px) !important;
-    top: 60px;
-}
-#difficultySelector {
-    position: absolute;
-    top: 95px; /* below AI toggle */
-    left: clamp(12px, 3vw, 20px);
-    display: none; /* already in your HTML */
-    background: #7d6ef3;
-    padding: 8px 12px;
-    border-radius: 10px;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border);
-}
-
-/* RESPONSIVE: tall phones */
 @media (max-height: 600px) {
-    .wrapper { gap: 0.75rem; padding: 0.75rem; }
+    .wrapper { gap: 0.75rem; }
     .site-header { display: none; }
 }
 
-/* RESPONSIVE: landscape mobile */
 @media (max-width: 480px) and (orientation: landscape) {
     .wrapper {
         flex-direction: row;

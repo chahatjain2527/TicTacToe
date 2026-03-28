@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link id="light-them" rel="stylesheet" href="lightThemStyle.css">    
+    <link id="light-them" rel="stylesheet" href="lightThemStyle.css">
     <script src="script.js" defer></script>
     <title>Tic-Tac-Toe</title>
 </head>
@@ -12,37 +12,41 @@
 
     <div class="wrapper">
 
-        <div class="theme-toggle">
-            <span class="toggle-label">☀</span>
-            <label class="switch">
-                <input type="checkbox" id="themeToggle">
-                <span class="slider"></span>
-            </label>
-            <span class="toggle-label toggle-text">☾</span>
+        <!-- Both toggles in one row, no more absolute positioning per toggle -->
+        <div class="controls-row">
+            <!-- AI toggle — left -->
+            <div class="ai-toggle">
+                <span class="toggle-label">Friend</span>
+                <label class="switch">
+                    <input type="checkbox" id="aiToggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="toggle-label">AI</span>
+            </div>
+
+            <!-- Theme toggle — right -->
+            <div class="theme-toggle">
+                <span class="toggle-label">☀</span>
+                <label class="switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="toggle-label">☾</span>
+            </div>
         </div>
 
-        <div class="theme-toggle ai">
-            <span class="toggle-label">Friend</span>
-            <label class="switch">
-                <input type="checkbox" id="aiToggle">
-                <span class="slider"></span>
-            </label>
-            <span class="toggle-label toggle-text">AI</span>
-        </div>
-
+        <!-- Difficulty selector — in normal flow, hidden by default -->
         <div id="difficultySelector" style="display:none;">
-            <label>
-                <input type="radio" name="difficulty" value="easy">
-                Easy
-            </label>
-            <label>
-                <input type="radio" name="difficulty" value="medium" checked>
-                Medium
-            </label>
-            <label>
-                <input type="radio" name="difficulty" value="hard">
-                Hard
-            </label>
+            <div class="difficulty-options">
+                <input type="radio" name="difficulty" id="easy" value="easy">
+                <label for="easy">Easy</label>
+
+                <input type="radio" name="difficulty" id="medium" value="medium" checked>
+                <label for="medium">Medium</label>
+
+                <input type="radio" name="difficulty" id="hard" value="hard">
+                <label for="hard">Hard</label>
+            </div>
         </div>
 
         <header class="site-header">

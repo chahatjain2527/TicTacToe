@@ -124,11 +124,11 @@ document.querySelectorAll('input[name="difficulty"]').forEach((i) => {
   i.addEventListener("change", () => {
     if (i.checked){
       if(i.value=="hard")
-      {alert("Work In Preogress...."); return;}
+      {alert("Work In Progress...."); return;}
 
       difficulty = i.value;
+      Initial();
     }
-    Initial();
   })
 });
 
